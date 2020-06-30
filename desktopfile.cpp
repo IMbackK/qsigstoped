@@ -24,7 +24,7 @@ bool DesktopFile::open(const QString& fileName)
         desktopFile.beginGroup("Desktop Entry");
         name = desktopFile.value("Name").toString();
         command = desktopFile.value("Exec").toString();
-        execName = QFileInfo(command).fileName().split(' ').at(0);
+        execName = QFileInfo(command).fileName().split(' ').at(0).truncate(16);
         return true;
     }
     else
@@ -33,7 +33,6 @@ bool DesktopFile::open(const QString& fileName)
         return false;
     }
 }
-
 QList<DesktopFile> DesktopFile::getDesktopFiles(const QList<QByteArray>& desktopFileDirs)
 {
 
